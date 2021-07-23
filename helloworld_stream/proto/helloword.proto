@@ -1,3 +1,4 @@
+// protoc --go_out=. --go-grpc_out=. helloworld_stream/proto/*.proto
 syntax = "proto3";
 
 option go_package = "helloworld_stream/proto";
@@ -8,6 +9,7 @@ package helloworld;
 service Greeter {
   // Sends a greeting
   rpc SayHelloStream(stream HelloRequest) returns (HelloReply) {}
+  rpc SayHelloListStream(stream ListHelloRequest) returns (ListHelloReply) {}
 }
 
 // The request message containing the user's name.
@@ -15,3 +17,9 @@ message HelloRequest { string name = 1; }
 
 // The response message containing the greetings
 message HelloReply { string message = 1; }
+
+// The request message containing the user's names array.
+message ListHelloRequest { repeated string name_list = 1; }
+
+// The response message containing the greetings
+message ListHelloReply { string message = 1; }
